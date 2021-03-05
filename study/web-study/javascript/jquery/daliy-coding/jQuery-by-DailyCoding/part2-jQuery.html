@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Part2-jQuery</title>
+    <style>
+      #navigation li {
+        list-style: none;
+        padding: 5px;
+      }
+      #navigation {
+        cursor: pointer;
+        display: flex;
+      }
+      #navigation .selected {
+        background-color: crimson;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="navigation">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>javascript</li>
+      <li class="selected">jQuery</li>
+      <li>PHP</li>
+      <li>mysql</li>
+    </ul>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      $("#navigation li").on("click", function () {
+        $("#navigation li").removeClass("selected");
+        $(this).addClass("selected");
+      });
+    </script>
+  </body>
+</html>
