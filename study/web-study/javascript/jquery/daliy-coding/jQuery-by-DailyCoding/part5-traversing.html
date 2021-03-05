@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- html -->
+    <ul class="first">
+      <li class="foo">list item 1</li>
+      <li>list item 2</li>
+      <li class="bar">list item 3</li>
+    </ul>
+    <ul class="second">
+      <li class="foo">list item 1</li>
+      <li>list item 2</li>
+      <li class="bar">list item 3</li>
+    </ul>
+
+    <!-- script -->
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      /*
+        traversing(탐색, 트래버싱)은 
+        1. 처음의 문맥을 유지하고
+        2. 그 문맥(context)에 속해 있는 다른 문맥을 찾으며
+          //find('...')
+        3. 다시 처음의 문맥으로 돌아올 수 있도록 해 준다.
+          //end()
+      */
+      $("ul.first")
+        .find(".foo")
+        .css("background-color", "red")
+        .end()
+        .find(".bar")
+        .css("background-color", "green");
+    </script>
+  </body>
+</html>

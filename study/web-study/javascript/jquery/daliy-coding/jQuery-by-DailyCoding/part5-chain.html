@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Part5-chain</title>
+  </head>
+  <body>
+    <a href="http://naver.org" id="tutorial" target="_self">NNNaver</a>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      /*
+        < chain >
+          jQuery는 기본적으로 chaining이 가능하도록 되어 있다.
+          즉 처음에 지정한 엘리먼트의 문맥을 잃지 않는다.
+          따라서 메소드1을 사용하고 바로 메소드2 ... 이렇게 사용할 수 있다.
+      */
+      //이 chain은 '인간의 언어와 유사하다'는 장점이 있다!
+      jQuery("#tutorial")
+        .attr("href", "http://naver.com")
+        .attr("target", "_blank")
+        .css("color", "red");
+    </script>
+    <script>
+      /* 위 script는 아래와 같다.(javascript 버전)
+        var tutorial = document.getElementById("tutorial");
+        tutorial.setAttribute("href", "http://naver.com");
+        tutorial.setAttribute("target", "_blank");
+        tutorial.style.color = "red";
+      */
+    </script>
+  </body>
+</html>
