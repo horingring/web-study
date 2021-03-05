@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Part3-wrapper</title>
+  </head>
+  <body>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      /*
+        < jQuery의 Wrapper>
+          wrapper : jQuery에서 wrapper는 
+          "jQuery+소괄호" 즉,
+          1.jQuery()   2.$()
+          를 말한다.
+          래퍼는, 인자로 전달된 요소들에 jQuery의 기능성을 부가하여 반환한다.
+      */
+      /*
+        <Wrapper의 안전한 사용>
+          $를 사용하는 다른 라이브러리들과의 충돌 때문에
+          다음과 같은 방법을 사용한다.
+          1. $ 대신 jQuery를 사용
+          2. $를 함수의 지역변수로 선언, 그 $에 jQuery를 인자로 줌
+      */
+      // 1. $ 대신 jQuery를 사용
+      jQuery("body").html("hello world1");
+      // 2. $를 함수의 지역변수로 선언, 그 $에 jQuery를 인자로 줌
+      (function ($) {
+        $("body").html("hello world2");
+      })(jQuery);
+    </script>
+  </body>
+</html>

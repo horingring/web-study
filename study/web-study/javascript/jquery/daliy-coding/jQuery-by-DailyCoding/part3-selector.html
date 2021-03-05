@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Part3-selector</title>
+  </head>
+  <body>
+    <ul>
+      <li>test2</li>
+    </ul>
+    <ul class="foo">
+      <li>test</li>
+    </ul>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      /*
+        <제어 대상을 지정하는 방법>
+        1. $( selector, [context] )
+        2. $( element )
+      */
+      //1. $( selector, [context] )
+      //아래 예제에서는 context에 this를 주어
+      //모든 li 중 this(이 경우에는 ul) 내부의 li만 지정하였다.
+      (function ($) {
+        $("ul.foo").click(function () {
+          $("li", this).css("background-color", "red");
+        });
+      })(jQuery);
+    </script>
+  </body>
+</html>
