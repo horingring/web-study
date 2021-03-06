@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Part6-event</title>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      // 클릭핸들러 정의
+      const clickHandler = () => {
+        alert("하이하이");
+      };
+
+      //실행문
+      /*
+        < event helper >
+          이벤트 헬퍼를 사용하면 on, off보다 직관적으로
+          이벤트를 걸어줄 수 있다.
+          예 - .click, .ready ...
+          
+      */
+      $(document).ready(function () {
+        $("#click_me").click(clickHandler);
+        $("#remove_event").click(function () {
+          alert("끊었다");
+          $("#click_me").off("click", clickHandler);
+        });
+        $("#trigger_event").click(function () {
+          $("#click_me").trigger("click");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <input id="click_me" type="button" value="클릭고고" />
+    <input id="remove_event" type="button" value="끊기" />
+    <input id="trigger_event" type="button" value="클릭고고강제실행" />
+  </body>
+</html>
