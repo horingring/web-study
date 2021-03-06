@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Part8-form</title>
+    <style>
+      span {
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <input type="text" />
+      <span></span>
+    </p>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      $("input")
+        .focus(function () {
+          $(this).next("span").html("<b>focus</b>");
+        })
+        .blur(function () {
+          $(this).next("span").html("<b>blur</b>");
+        })
+        .change(function (e) {
+          alert("change!" + $(e.target).val());
+        })
+        .select(function (e) {
+          $(this).next("span").html("<b>select</b>");
+        });
+    </script>
+  </body>
+</html>

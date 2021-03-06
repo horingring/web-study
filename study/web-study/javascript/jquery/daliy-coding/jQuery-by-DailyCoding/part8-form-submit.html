@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Part8-form-submit</title>
+    <style>
+      p {
+        margin: 0;
+        color: blue;
+      }
+      div,
+      p {
+        margin-left: 10px;
+      }
+      span {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <p>'correct'라고 입력하고 버튼을 누르세요</p>
+    <form action="javascript:alert('success!!');">
+      <div>
+        <input type="text" />
+        <input type="submit" />
+      </div>
+    </form>
+    <span></span>
+
+    <!-- js -->
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      $("form").submit(function () {
+        if ($("input:first").val() === "correct") {
+          $(this).next("span").text("합격").show();
+          return true;
+        }
+        $(this).next("span").text("불합격").show().fadeOut(1000);
+        return false;
+      });
+    </script>
+  </body>
+</html>
