@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Part7-엘리먼트 제어-클래스</title>
+  </head>
+  <style>
+    p {
+      margin: 4px;
+      font-size: 16px;
+      font-weight: bolder;
+      cursor: pointer;
+    }
+    .blue {
+      color: blue;
+    }
+    .highlight {
+      background-color: yellow;
+    }
+  </style>
+
+  <body>
+    <p class="blue">Click to toggle</p>
+    <p class="blue highlight">highlight</p>
+    <p class="blue">on these</p>
+    <p class="blue">p태그</p>
+
+    <!-- js -->
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      //toggleClass
+      $("p").click(function () {
+        $(this).toggleClass("highlight");
+      });
+    </script>
+  </body>
+</html>
