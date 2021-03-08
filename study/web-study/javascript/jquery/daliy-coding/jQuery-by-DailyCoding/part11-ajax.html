@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Part11-Ajax</title>
+  </head>
+  <body>
+    <div id="result"></div>
+    <input type="text" id="msg" />
+    <input type="button" id="getResult" value="get result" />
+    <script src="./jquery-3.6.0.min.js"></script>
+    <script>
+      $("#getResult").click(function () {
+        $("#result").html("");
+        $.ajax({
+          url: "example.jquery.ajax.php",
+          dataType: "json",
+          type: "POST",
+          data: { msg: $("#msg").val() },
+          success: function (result) {
+            if (result["result"] == true) {
+              $("#result").html(result["msg"]);
+            }
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
