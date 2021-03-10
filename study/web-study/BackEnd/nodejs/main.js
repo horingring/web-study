@@ -85,18 +85,20 @@ var app = http.createServer(function(request, response) {
   } else if (pathname === '/create_process') {
     var body = '';
     //웹 브라우저로부터 전송된 post 데이터를 조각조각 받는 로직
-    request.on('data', function(data){
+    request.on('data', function(data) {
       body = body + data;
     });
     // 모든 post데이터를 받았을 때 실행되는 로직
-    request.on('end', function(){
+    request.on('end', function() {
       var post = qs.parse(body);
       console.log(post);
       var title = post.title;
       var description = post.description;
+      fs.writeFile(`data/${title}`, description, 'utf8', function(err) {
+        response.writeHead(302, {Location: `/?id=${title}`});
+        response.end('success');
+      })
     });
-    response.writeHead(200);
-    response.end('success');
   } else {
     response.writeHead(404);
     response.end('Not found');
