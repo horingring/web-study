@@ -24,7 +24,9 @@ mongoose
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
-app.get("/", (req, res) => res.send("Hello World! 하이하이 하이하이!!!!"));
+app.get("/", (req, res) =>
+  res.send("Hello World! 하이하이 하이하이 노드몬 하이!!!!")
+);
 
 app.post("/register", (req, res) => {
   //회원가입 할 때 필요한 정보들을 client에서 가져오면
@@ -33,6 +35,7 @@ app.post("/register", (req, res) => {
   //bodyParser가 있는 덕분에 req.body로 간단히 요청(req)의 body를 불러올 수 있는 것임
   const user = new User(req.body);
 
+  //save 메소드를 사용하면 db의 model에 데이터가 저장됨. 이후 callback 호출
   user.save((err, userInfo) => {
     if (err) return res.json({ success: false, err });
     return res.status(200).json({ success: true });
