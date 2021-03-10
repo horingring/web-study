@@ -83,7 +83,7 @@ var app = http.createServer(function(request, response) {
                 <input type="submit" />
               </p>
             </form>
-          `
+          `, ''
         );
         response.writeHead(200);
         response.end(template);
@@ -107,7 +107,7 @@ var app = http.createServer(function(request, response) {
           Location: `/?id=${title}`
         });
         response.end('success');
-      })
+      });
     });
   } else if (pathname === '/update') {
     fs.readdir('./data', function(err, filelist) {
