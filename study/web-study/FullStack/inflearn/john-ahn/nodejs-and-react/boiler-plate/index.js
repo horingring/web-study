@@ -67,7 +67,7 @@ app.post("/api/users/login", (req, res) => {
 
         // 토큰을 저장한다. 어디에? 쿠키 or 로컬스토리지
         res
-          .cookie("x-auth", user.token)
+          .cookie("x_auth", user.token)
           .status(200)
           .json({ loginSuccess: true, userId: user._id });
       });
@@ -89,6 +89,18 @@ app.get("/api/users/auth", auth, (req, res) => {
     lastname: req.user.lastname,
     role: req.user.role,
     image: req.user.image,
+  });
+});
+
+app.get("/api/users/logout", auth, (req, res) => {
+  // logout도 login시 진행되어야 하므로 미들웨어인 auth가 callback에 앞서 실행되어야 한다.
+  // auth 완료 후, 로그아웃을 진행한다.
+  // 로그아웃은 서버에 등록된 토큰을 없애주기만 하면 된다.
+  User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
+    if (err) return res.json({ success: false, err });
+    return res.status(200).send({
+      success: true,
+    });
   });
 });
 
