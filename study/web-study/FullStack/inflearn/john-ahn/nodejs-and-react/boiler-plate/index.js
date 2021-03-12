@@ -4,7 +4,7 @@ const port = 5000;
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
-
+const { auth } = require("./middleware/auth");
 const { User } = require("./models/User");
 
 //application/x-www-form-urlencoded 이렇게 된 데이터를 분석해서 가져올 수 있도록 함
@@ -30,7 +30,7 @@ app.get("/", (req, res) =>
   res.send("Hello World! 하이하이 하이하이 노드몬 하이!!!!")
 );
 
-app.post("/register", (req, res) => {
+app.post("/api/users/register", (req, res) => {
   //회원가입 할 때 필요한 정보들을 client에서 가져오면
   //그것들을 db에 넣어준다.
 
@@ -44,7 +44,7 @@ app.post("/register", (req, res) => {
   });
 });
 
-app.post("/login", (req, res) => {
+app.post("/api/users/login", (req, res) => {
   //요청된 이메일이 데이터베이스에 있는지 찾는다.
   User.findOne({ email: req.body.email }, (err, user) => {
     if (!user) {
@@ -72,6 +72,23 @@ app.post("/login", (req, res) => {
           .json({ loginSuccess: true, userId: user._id });
       });
     });
+  });
+});
+
+app.get("/api/users/auth", auth, (req, res) => {
+  //여기까지 미들웨어를 통과해 왔다는 얘기는 Authentication(인증)이 True라는 말.
+  //즉 인증이 잘 되었다.
+  //인증이 끝났으니, 해당 클라이언트 페이지에서 요구하는
+  //중요 사용자 정보를 돌려주면 된다.
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin: req.user.role === 0 ? false : true,
+    isAuth: true,
+    email: req.user.email,
+    name: req.user.name,
+    lastname: req.user.lastname,
+    role: req.user.role,
+    image: req.user.image,
   });
 });
 
