@@ -4,6 +4,7 @@ var url = require("url");
 var qs = require("querystring");
 var template = require("./lib/template");
 var path = require("path");
+var sanitizeHtml = require("sanitize-html");
 
 var app = http.createServer(function (request, response) {
   var _url = request.url;
@@ -17,14 +18,22 @@ var app = http.createServer(function (request, response) {
       var filteredPath = path.parse(`${queryData.id}`).base;
       fs.readFile(`data/${filteredPath}`, "utf8", function (err, description) {
         var title = queryData.id;
+        var sanitizedTitle = sanitizeHtml(title);
+        var sanitizedDescription = sanitizeHtml(description, {
+          allowedTags: ["h1", "b", "strong"],
+        });
         var list = template.list(filelist);
         var html = template.HTML(
-          title,
+          sanitizedTitle,
           list,
           `
-            <h2>${queryData.id === undefined ? "Welcome" : title}</h2>
+            <h2>${queryData.id === undefined ? "Welcome" : sanitizedTitle}</h2>
             <p>
-            ${queryData.id === undefined ? "Hello, Node.js" : description}
+            ${
+              queryData.id === undefined
+                ? "Hello, Node.js"
+                : sanitizedDescription
+            }
             </p>
           `,
           `
@@ -33,9 +42,9 @@ var app = http.createServer(function (request, response) {
                 ? ""
                 : `
                 <a href="/create">create</a>
-                <a href="/update?id=${title}">update</a>
+                <a href="/update?id=${sanitizedTitle}">update</a>
                 <form action="/delete_process" method="post">
-                  <input type="hidden" name="id" value=${title} />
+                  <input type="hidden" name="id" value=${sanitizedTitle} />
                   <input type="submit" value="delete"></input>
                 </form>
               `
