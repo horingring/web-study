@@ -30,6 +30,8 @@ app.get("/", (req, res) =>
   res.send("Hello World! 하이하이 하이하이 노드몬 하이!!!!")
 );
 
+app.get("/api/hello", (req, res) => res.send("안녕하세요 서버입니다~"));
+
 app.post("/api/users/register", (req, res) => {
   //회원가입 할 때 필요한 정보들을 client에서 가져오면
   //그것들을 db에 넣어준다.

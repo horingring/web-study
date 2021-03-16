@@ -33,27 +33,3 @@ function App() {
 }
 
 export default App;
-
-function Home() {
-  return (
-    <div>
-      <h2>Home 안녕하세요</h2>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h2>About 안녕하세요</h2>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard 안녕하세요</h2>
-    </div>
-  );
-}
