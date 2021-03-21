@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.끝말잇기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <div>{{word}}</div>
+      <input type="text" v-model="input" ref="inputRef" />
+      <button v-on:click="clickHandler">제출</button>
+      <div>{{result}}</div>
+    </div>
+
+    <script>
+      const root = new Vue({
+        el: "#root",
+        data: {
+          word: "노트북",
+          input: "",
+          result: "끝말잇기 시작!",
+        },
+        methods: {
+          clickHandler() {
+            if (this.word[this.word.length - 1] === this.input[0]) {
+              this.word = this.input;
+              this.result = "정답!";
+              this.input = "";
+              this.$refs.inputRef.focus();
+            } else {
+              this.result = "땡!";
+              this.input = "";
+              this.$refs.inputRef.focus();
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
