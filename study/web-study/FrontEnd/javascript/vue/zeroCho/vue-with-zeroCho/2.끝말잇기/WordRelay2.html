@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.끝말잇기-반복</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <word-relay></word-relay>
+      <br />
+      <word-relay></word-relay>
+      <br />
+      <word-relay></word-relay>
+    </div>
+    <script>
+      //전역 컴포넌트
+      Vue.component("word-relay", {
+        template: `
+          <div>
+            <div>{{word}}</div>
+            <input type="text" v-model="input" ref="inputRef" />
+            <button v-on:click="submitHandler">제출</button>
+            <div>{{result}}</div>
+          </div>
+        `,
+        data() {
+          return {
+            word: "초당순두부",
+            input: "",
+            result: "끝말잇기 시작!",
+          };
+        },
+        methods: {
+          submitHandler() {
+            if (this.word[this.word.length - 1] === this.input[0]) {
+              this.result = "정답!";
+              this.word = this.input;
+              this.input = "";
+              this.$refs.inputRef.focus();
+            } else {
+              this.result = "땡!";
+              this.input = "";
+              this.$refs.inputRef.focus();
+            }
+          },
+        },
+      });
+    </script>
+    <script>
+      const App = new Vue({
+        el: "#root",
+      });
+    </script>
+  </body>
+</html>
