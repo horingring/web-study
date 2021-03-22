@@ -9,11 +9,11 @@
   </head>
   <body>
     <div id="root">
-      <word-relay></word-relay>
+      <word-relay start-word="초당순두부"></word-relay>
       <br />
-      <word-relay></word-relay>
+      <word-relay start-word="삼겹살"></word-relay>
       <br />
-      <word-relay></word-relay>
+      <word-relay start-word="소고기"></word-relay>
     </div>
     <script>
       //전역 컴포넌트
@@ -26,9 +26,11 @@
             <div>{{result}}</div>
           </div>
         `,
+        props: ["startWord"],
         data() {
+          console.log(this);
           return {
-            word: "초당순두부",
+            word: this.startWord,
             input: "",
             result: "끝말잇기 시작!",
           };
