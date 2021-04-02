@@ -11,6 +11,13 @@
       scrollHeight: 0,
       objs: {
         container: document.querySelector("#scroll-section-0"),
+        messageA: document.querySelector("#scroll-section-0 .main-message.a"),
+        messageB: document.querySelector("#scroll-section-0 .main-message.b"),
+        messageC: document.querySelector("#scroll-section-0 .main-message.c"),
+        messageD: document.querySelector("#scroll-section-0 .main-message.d"),
+      },
+      values: {
+        messageA_opacity: [0, 1],
       },
     },
     {
@@ -63,6 +70,39 @@
     document.body.setAttribute("id", `show-scene-${currentScene}`);
   }
 
+  function calcValues(values, currentYOffset) {
+    let rv;
+    let scrollRatio = currentYOffset / sceneInfo[currentScene].scrollHeight;
+    rv = scrollRatio * (values[1] - values[0]) + values[0];
+    return rv;
+  }
+
+  function playAnimation() {
+    const objs = sceneInfo[currentScene].objs;
+    const values = sceneInfo[currentScene].values;
+    const currentYOffset = yOffset - prevScrollHeight;
+    switch (currentScene) {
+      case 0:
+        // console.log("0 play");
+        let messageA_opacity_in = calcValues(
+          values.messageA_opacity,
+          currentYOffset
+        );
+        objs.messageA.style.opacity = messageA_opacity_in;
+
+        break;
+      case 1:
+        // console.log("1 play");
+        break;
+      case 2:
+        // console.log("2 play");
+        break;
+      case 3:
+        // console.log("3 play");
+        break;
+    }
+  }
+
   function scrollLoop() {
     prevScrollHeight = 0;
 
@@ -80,6 +120,8 @@
       currentScene--;
       document.body.setAttribute("id", `show-scene-${currentScene}`);
     }
+
+    playAnimation();
   }
 
   window.addEventListener("scroll", () => {
