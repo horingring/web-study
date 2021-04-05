@@ -111,6 +111,15 @@ a {
 .desc-message {
   width: 50%;
   font-weight: bold;
+  opacity: 0;
+}
+#scroll-section-2 .b {
+  top: 10%;
+  left: 40%;
+}
+#scroll-section-2 .c {
+  top: 15%;
+  left: 45%;
 }
 .pin {
   width: 1px;
@@ -188,6 +197,13 @@ a {
   }
   .desc-message {
     width: 20%;
+  }
+  #scroll-section-2 .b {
+    top: 20%;
+    left: 53%;
+  }
+  #scroll-section-2 .c {
+    left: 55%;
   }
 
   /* #scroll-section-3 */
