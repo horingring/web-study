@@ -457,6 +457,9 @@
         break;
       case 3:
         // console.log("3 play");
+
+        let step = 0;
+
         /*  브라우저가 어떤 사이즈든
             canvas 사이즈가 브라우저를 꽉 채우도록 하기
         */
@@ -523,6 +526,20 @@
           whiteRectWidth,
           recalculatedInnerHeight
         );
+
+        if (scrollRatio < values.rect1X[2].end) {
+          step = 1;
+          // console.log("캔버스 닿기 전");
+          objs.canvas.classList.remove("sticky");
+        } else {
+          step = 2;
+          // console.log("캔버스 닿은 후");
+          objs.canvas.classList.add("sticky");
+          objs.canvas.style.top = `${-(
+            (objs.canvas.height - objs.canvas.height * canvasScaleRatio) /
+            2
+          )}px`;
+        }
 
         break;
     }

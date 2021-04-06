@@ -149,7 +149,8 @@ a {
 .mid-message strong {
   color: rgb(29, 29, 31);
 }
-.image-blend-canvas {
+.image-blend-canvas.sticky {
+  position: fixed;
 }
 .canvas-caption {
   max-width: 1000px;
