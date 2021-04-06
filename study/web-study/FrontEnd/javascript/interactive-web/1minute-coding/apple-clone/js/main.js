@@ -104,6 +104,7 @@
       scrollHeight: 0,
       objs: {
         container: document.querySelector("#scroll-section-3"),
+        canvasCaption: document.querySelector(".canvas-caption"),
         canvas: document.querySelector(".image-blend-canvas"),
         context: document.querySelector(".image-blend-canvas").getContext("2d"),
         imagesPath: [
@@ -118,6 +119,8 @@
         rectStartY: 0,
         blendHeight: [0, 0, { start: 0, end: 0 }],
         canvas_scale: [0, 0, { start: 0, end: 0 }],
+        canvasCaption_opacity: [0, 1, { start: 0, end: 0 }],
+        canvasCaption_translateY: [20, 0, { start: 0, end: 0 }],
       },
     },
   ];
@@ -145,6 +148,14 @@
     }
   }
   setCanvasImages();
+
+  function checkMenu() {
+    if (yOffset >= document.querySelector(".global-nav").offsetHeight) {
+      document.body.classList.add("local-nav-sticky");
+    } else {
+      document.body.classList.remove("local-nav-sticky");
+    }
+  }
 
   function setLayout() {
     //각 스크롤 섹션의 높이 세팅
@@ -574,6 +585,7 @@
               values.canvas_scale,
               currentYOffset
             )})`;
+            objs.canvas.style.marginTop = 0;
           }
 
           if (
@@ -583,8 +595,25 @@
             step = 3;
             objs.canvas.classList.remove("sticky");
             objs.canvas.style.marginTop = `${scrollHeight * 0.4}px`;
-          } else {
-            objs.canvas.style.marginTop = 0;
+
+            values.canvasCaption_opacity[2].start = values.canvas_scale[2].end;
+            values.canvasCaption_opacity[2].end =
+              values.canvasCaption_opacity[2].start + 0.1;
+
+            values.canvasCaption_translateY[2].start =
+              values.canvasCaption_opacity[2].start;
+            values.canvasCaption_translateY[2].end =
+              values.canvasCaption_opacity[2].end;
+
+            objs.canvasCaption.style.opacity = calcValues(
+              values.canvasCaption_opacity,
+              currentYOffset
+            );
+
+            objs.canvasCaption.style.transform = `translate3d(0, ${calcValues(
+              values.canvasCaption_translateY,
+              currentYOffset
+            )}%, 0)`;
           }
         }
 
@@ -621,6 +650,7 @@
   window.addEventListener("scroll", () => {
     yOffset = window.pageYOffset;
     scrollLoop();
+    checkMenu();
   });
 
   // window.addEventListener('DOMContentLoaded', setLayout);

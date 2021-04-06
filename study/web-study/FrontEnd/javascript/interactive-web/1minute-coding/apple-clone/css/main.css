@@ -39,6 +39,12 @@ a {
   border-bottom: 1px solid #ddd;
   padding: 0 1rem;
 }
+.local-nav-sticky .local-nav {
+  position: fixed;
+  top: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: saturate(180%) blur(15px);
+}
 .global-nav-links,
 .local-nav-links {
   max-width: 1000px;
@@ -154,7 +160,7 @@ a {
 }
 .canvas-caption {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: -8em auto 0;
   padding: 0 1rem;
   font-size: 1.2rem;
   color: #888;
@@ -207,6 +213,7 @@ a {
   /* #scroll-section-1 */
   .description {
     font-size: 2rem;
+    padding: 0;
   }
   .description strong {
     font-size: 6rem;
@@ -232,9 +239,12 @@ a {
 
   /* #scroll-section-3 */
   .mid-message {
+    width: 1000px;
     font-size: 4vw;
+    padding: 0;
   }
   .canvas-caption {
     font-size: 2rem;
+    padding: 0;
   }
 }
