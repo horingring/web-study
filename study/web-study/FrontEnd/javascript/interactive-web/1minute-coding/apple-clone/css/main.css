@@ -62,6 +62,7 @@ a {
 
 /* #scroll-section-0 */
 .scroll-section {
+  position: relative;
   padding-top: 50vh;
 }
 #scroll-section-0 h1 {

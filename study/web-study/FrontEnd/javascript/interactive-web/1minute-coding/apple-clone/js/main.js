@@ -403,17 +403,68 @@
           )}%)`;
         }
 
+        //
+        // section-3에서 나타날 캔버스를 미리 나타나게 하기
+        if (scrollRatio > 0.9) {
+          /*  브라우저가 어떤 사이즈든
+            canvas 사이즈가 브라우저를 꽉 채우도록 하기
+          */
+          const objs = sceneInfo[3].objs;
+          const values = sceneInfo[3].values;
+
+          let widthRatio = window.innerWidth / objs.canvas.width;
+          let heightRatio = window.innerHeight / objs.canvas.height;
+
+          let canvasScaleRatio;
+          if (widthRatio <= heightRatio) {
+            //브라우저 사이즈가 홀쭉(세로로 길쭉)할 경우
+            canvasScaleRatio = heightRatio;
+          } else {
+            //브라우저 사이즈가 납작(가로로 길쭉)할 경우
+            canvasScaleRatio = widthRatio;
+          }
+
+          objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
+          objs.context.fillStyle = "white";
+          objs.context.drawImage(objs.images[0], 0, 0);
+
+          const recalculatedInnerWidth =
+            document.body.offsetWidth / canvasScaleRatio;
+          const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
+
+          const whiteRectWidth = recalculatedInnerWidth * 0.15;
+          values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
+          values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
+          values.rect2X[0] =
+            values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
+          values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
+
+          //좌우 흰색 박스 그리기
+          objs.context.fillRect(
+            values.rect1X[0],
+            0,
+            whiteRectWidth,
+            recalculatedInnerHeight
+          );
+          objs.context.fillRect(
+            values.rect2X[0],
+            0,
+            whiteRectWidth,
+            recalculatedInnerHeight
+          );
+        }
+
         break;
       case 3:
         // console.log("3 play");
         /*  브라우저가 어떤 사이즈든
             canvas 사이즈가 브라우저를 꽉 채우도록 하기
         */
-        let canvasScaleRatio;
 
         let widthRatio = window.innerWidth / objs.canvas.width;
         let heightRatio = window.innerHeight / objs.canvas.height;
 
+        let canvasScaleRatio;
         if (widthRatio <= heightRatio) {
           //브라우저 사이즈가 홀쭉(세로로 길쭉)할 경우
           canvasScaleRatio = heightRatio;
@@ -423,6 +474,7 @@
         }
 
         objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
+        objs.context.fillStyle = "white";
         objs.context.drawImage(objs.images[0], 0, 0);
 
         const recalculatedInnerWidth =
@@ -430,7 +482,11 @@
         const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
 
         if (values.rectStartY === 0) {
-          values.rectStartY = objs.canvas.getBoundingClientRect().top;
+          values.rectStartY =
+            objs.canvas.offsetTop +
+            (objs.canvas.height - objs.canvas.height * canvasScaleRatio) / 2;
+          values.rect1X[2].start = window.innerHeight / 2 / scrollHeight;
+          values.rect2X[2].start = window.innerHeight / 2 / scrollHeight;
           values.rect1X[2].end = values.rectStartY / scrollHeight;
           values.rect2X[2].end = values.rectStartY / scrollHeight;
         }
