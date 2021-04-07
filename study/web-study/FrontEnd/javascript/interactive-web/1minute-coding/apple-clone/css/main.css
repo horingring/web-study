@@ -20,6 +20,9 @@ a {
 }
 
 /* 로딩 */
+body.before-load {
+  overflow: hidden;
+}
 .loading {
   display: flex;
   align-items: center;
