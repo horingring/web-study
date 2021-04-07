@@ -4,6 +4,11 @@
   let currentScene = 0; //현재 활성화된(눈 앞에 보고 있는) 씬(scroll-section)
   let enterNewScene = false; //새로운 scene이 시작된 순간 true
 
+  let acc = 0.1;
+  let delayedYOffset = 0;
+  let rafId;
+  let rafState;
+
   const sceneInfo = [
     {
       //0
@@ -227,10 +232,10 @@
     switch (currentScene) {
       case 0:
         // console.log("0 play");
-        let sequence = Math.round(
-          calcValues(values.imageSequence, currentYOffset)
-        );
-        objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+        // let sequence = Math.round(
+        //   calcValues(values.imageSequence, currentYOffset)
+        // );
+        // objs.context.drawImage(objs.videoImages[sequence], 0, 0);
         objs.canvas.style.opacity = calcValues(
           values.canvas_opacity_out,
           currentYOffset
@@ -326,10 +331,10 @@
         break;
       case 2:
         // console.log("2 play");
-        let sequence2 = Math.round(
-          calcValues(values.imageSequence, currentYOffset)
-        );
-        objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
+        // let sequence2 = Math.round(
+        //   calcValues(values.imageSequence, currentYOffset)
+        // );
+        // objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
         if (scrollRatio < 0.5) {
           //in
           objs.canvas.style.opacity = calcValues(
@@ -629,17 +634,20 @@
       prevScrollHeight += sceneInfo[i].scrollHeight;
     }
 
-    if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+    if (
+      delayedYOffset >
+      prevScrollHeight + sceneInfo[currentScene].scrollHeight
+    ) {
       currentScene++;
       document.body.setAttribute("id", `show-scene-${currentScene}`);
       enterNewScene = true;
     }
 
-    if (yOffset < prevScrollHeight) {
-      if (yOffset < 0) return;
+    if (delayedYOffset < prevScrollHeight) {
+      enterNewScene = true;
+      if (currentScene === 0) return; //브라우저 바운스 효과로 인해 마이너스가 되는 것을 방지(모바일)
       currentScene--;
       document.body.setAttribute("id", `show-scene-${currentScene}`);
-      enterNewScene = true;
     }
 
     if (enterNewScene) return;
@@ -647,10 +655,40 @@
     playAnimation();
   }
 
+  function loop() {
+    delayedYOffset = delayedYOffset + (yOffset - delayedYOffset) * acc;
+
+    if (!enterNewScene) {
+      const currentYOffset = delayedYOffset - prevScrollHeight;
+      const objs = sceneInfo[currentScene].objs;
+      const values = sceneInfo[currentScene].values;
+      if (currentScene === 0 || currentScene === 2) {
+        let sequence = Math.round(
+          calcValues(values.imageSequence, currentYOffset)
+        );
+        if (objs.videoImages[sequence]) {
+          objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+        }
+      }
+    }
+
+    rafId = requestAnimationFrame(loop);
+
+    if (Math.abs(yOffset - delayedYOffset) < 1) {
+      cancelAnimationFrame(rafId);
+      rafState = false;
+    }
+  }
+
   window.addEventListener("scroll", () => {
     yOffset = window.pageYOffset;
     scrollLoop();
     checkMenu();
+
+    if (!rafState) {
+      requestAnimationFrame(loop);
+      rafState = true;
+    }
   });
 
   // window.addEventListener('DOMContentLoaded', setLayout);
