@@ -152,7 +152,6 @@
       sceneInfo[3].objs.images.push(imgElem3);
     }
   }
-  setCanvasImages();
 
   function checkMenu() {
     if (yOffset >= document.querySelector(".global-nav").offsetHeight) {
@@ -696,5 +695,13 @@
     setLayout();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
   });
-  window.addEventListener("resize", setLayout);
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 600) {
+      setLayout();
+    }
+    sceneInfo[3].values.rectStartY = 0;
+  });
+  window.addEventListener("orientationchange", setLayout);
+
+  setCanvasImages();
 })();
