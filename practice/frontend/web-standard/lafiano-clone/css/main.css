@@ -104,6 +104,7 @@ header .message-box p {
 .section-aside ul {
   height: 100vh;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .section-aside ul::-webkit-scrollbar {
   width: 8px;
@@ -120,53 +121,137 @@ header .message-box p {
 
 .section-aside li {
   margin-top: 20px;
-}
-.section-aside li a {
   position: relative;
-  display: block;
-  padding: 20px;
-  height: 18vh;
-}
-.section-aside li a .mask {
-  opacity: 0;
-}
-.mask > div {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  padding: 20px;
-  background: #7793a8;
-  color: white;
-  /* background-color: rgba(9, 64, 103, 0.95); */
 }
 
+/* 배경사진 */
 .section-aside li:nth-child(1) a {
   background-image: url(../image/introduce.jpg);
-  background-size: auto 100%;
 }
 .section-aside li:nth-child(2) a {
   background-image: url(../image/company.jpg);
-  background-size: auto 100%;
 }
 .section-aside li:nth-child(3) a {
   background-image: url(../image/dummy1.jpg);
-  background-size: auto 100%;
 }
 .section-aside li:nth-child(4) a {
   background-image: url(../image/dummy2.jpg);
-  background-size: auto 100%;
 }
 .section-aside li:nth-child(5) a {
   background-image: url(../image/dummy3.jpg);
-  background-size: auto 100%;
 }
 .section-aside li:nth-child(6) a {
   background-image: url(../image/dummy4.jpg);
-  background-size: auto 100%;
 }
 .section-aside li:nth-child(7) a {
   background-image: url(../image/dummy5.jpg);
+}
+
+.section-aside li a {
+  position: relative;
+  display: block;
+  height: fit-content;
+  text-decoration: none;
   background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  transition: 1s;
+}
+
+.section-aside li a .mask {
+  opacity: 0;
+  padding: 20px;
+  background: rgba(9, 64, 103, 0.95);
+  height: 20vh;
+  overflow: hidden;
+  transition: 0.5s;
+}
+.mask > p {
+  color: white;
+  padding-bottom: 20px;
+}
+
+.mask > p:nth-child(1) {
+  color: #b4a797;
+  transform: translate3d(0, 4vh, 0);
+  transition: 0.4s;
+  opacity: 0;
+}
+.mask > p:nth-child(2) {
+  font-size: 1.2em;
+  transform: translate3d(0, 7vh, 0);
+  transition: 0.7s;
+  opacity: 0;
+}
+.mask > p:nth-child(3) {
+  font-size: 0.8em;
+  transform: translate3d(0, 10vh, 0);
+  transition: 0.8s;
+  opacity: 0;
+}
+
+.mask > div {
+  display: flex;
+  align-items: center;
+  font-size: 0.8em;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 10px 20px;
+  background: #7793a8;
+  color: white;
+  transform: translate3d(100%, 0, 0);
+}
+@keyframes viewAni {
+  40% {
+    transform: translate3d(100%, 0, 0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.mask > div > span:nth-child(1) {
+  position: relative;
+  left: 7px;
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  background: white;
+}
+.mask > div > span:nth-child(2) {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+  transform: rotateZ(45deg);
+}
+
+/* hover */
+.section-aside li a:hover .mask {
+  opacity: 1;
+}
+.section-aside li a:hover .mask p:nth-child(1) {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+.section-aside li a:hover .mask p:nth-child(2) {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+.section-aside li a:hover .mask p:nth-child(3) {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+.section-aside li a:hover .mask > div {
+  animation: viewAni 0.8s forwards;
+}
+
+.section-aside li a:hover {
+  background-size: auto 120%;
 }
 
 /* .section-right */
