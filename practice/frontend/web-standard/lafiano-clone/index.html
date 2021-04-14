@@ -277,5 +277,96 @@
         <li>시공: RULLU건설(주)</li>
       </ul>
     </footer>
+
+    <script>
+      (() => {
+        window.addEventListener("load", () => {
+          //li 1
+          setTimeout(() => {
+            const li1 = document.querySelector(
+              ".section-aside ul li:nth-child(1)"
+            );
+            li1.style.opacity = 1;
+            li1.style.transform = "translate3d(0, 0, 0)";
+          }, 200);
+
+          //li 2
+          setTimeout(() => {
+            const li2 = document.querySelector(
+              ".section-aside ul li:nth-child(2)"
+            );
+            li2.style.opacity = 1;
+            li2.style.transform = "translate3d(0, 0, 0)";
+          }, 500);
+
+          //li 3
+          setTimeout(() => {
+            const li3 = document.querySelector(
+              ".section-aside ul li:nth-child(3)"
+            );
+            li3.style.opacity = 1;
+            li3.style.transform = "translate3d(0, 0, 0)";
+          }, 800);
+
+          //li 4
+          setTimeout(() => {
+            const li4 = document.querySelector(
+              ".section-aside ul li:nth-child(4)"
+            );
+            li4.style.opacity = 1;
+            li4.style.transform = "translate3d(0, 0, 0)";
+          }, 1100);
+
+          //li 5
+          setTimeout(() => {
+            const li5 = document.querySelector(
+              ".section-aside ul li:nth-child(5)"
+            );
+            li5.style.opacity = 1;
+            li5.style.transform = "translate3d(0, 0, 0)";
+          }, 1400);
+
+          //li 6
+          setTimeout(() => {
+            const li6 = document.querySelector(
+              ".section-aside ul li:nth-child(6)"
+            );
+            li6.style.opacity = 1;
+            li6.style.transform = "translate3d(0, 0, 0)";
+          }, 1700);
+
+          //li 7
+          setTimeout(() => {
+            const li7 = document.querySelector(
+              ".section-aside ul li:nth-child(7)"
+            );
+            li7.style.opacity = 1;
+            li7.style.transform = "translate3d(0, 0, 0)";
+          }, 2000);
+
+          // .main-image-box
+          const mainImageBox = document.querySelector(".main-image-box");
+          mainImageBox.style.opacity = 1;
+
+          // span (in .main-image-box)
+          let arr = [];
+          for (let i = 1; i <= 12; i++) {
+            arr.push(document.querySelector(`#char${i}`));
+          }
+
+          let arr2 = [];
+          for (let i = 0; i < 12; i++) {
+            let randomIndex = Math.round(Math.random() * (arr.length - 1));
+            arr2.push(arr.splice(randomIndex, 1)[0]);
+          }
+
+          for (let i = 0; i < 12; i++) {
+            setTimeout(() => {
+              arr2[i].style.opacity = 1;
+            }, 1000 + 200 * i);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
