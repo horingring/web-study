@@ -76,18 +76,24 @@
           <section>
             <header>
               <div class="main-logo">
-                <p>HILLSTATE</p>
-                <p>- 힐스테이트 룰루 -</p>
-                <p>LAAAFIANO</p>
+                <span></span>
+                <div>
+                  <p>HILLSTATE</p>
+                  <p>- 힐스테이트 룰루 -</p>
+                  <p>LAAAFIANO</p>
+                </div>
               </div>
               <div class="message-box">
-                <h3>새로운 시대를 위한 집</h3>
-                <p>
-                  ANYTHING IS POSSIBLE<br />
-                  IN LAGOM LIFE<br />
-                  FIND THE VALUE OF LIFE<br />
-                  IN LAAAFIANO
-                </p>
+                <span></span>
+                <div>
+                  <h3>새로운 시대를 위한 집</h3>
+                  <p>
+                    ANYTHING IS POSSIBLE<br />
+                    IN LAGOM LIFE<br />
+                    FIND THE VALUE OF LIFE<br />
+                    IN LAAAFIANO
+                  </p>
+                </div>
               </div>
             </header>
           </section>
@@ -365,6 +371,32 @@
               arr2[i].style.opacity = 1;
             }, 1000 + 200 * i);
           }
+
+          // .section-main header
+          // header .main-logo
+          setTimeout(() => {
+            // span
+            const spanAll = document.querySelectorAll("header > div > span");
+            const span1 = spanAll[0];
+            const span2 = spanAll[1];
+            span1.style.width = "100%";
+            span2.style.width = "100%";
+
+            // .main-logo > div
+            const mainLogo_div = document.querySelector(
+              "header .main-logo>div"
+            );
+            mainLogo_div.style.opacity = 1;
+            mainLogo_div.style.transform = "translate3d(0,0,0)";
+          }, 1500);
+
+          setTimeout(() => {
+            const messageBox_div = document.querySelector(
+              "header .message-box>div"
+            );
+            messageBox_div.style.opacity = 1;
+            messageBox_div.style.transform = "translate3d(0,0,0)";
+          }, 2000);
         });
       })();
     </script>
