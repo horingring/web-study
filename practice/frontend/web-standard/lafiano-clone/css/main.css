@@ -9,14 +9,113 @@ body {
 
 /* nav.nav */
 nav {
-  display: none;
+  /* display: none; */
+  color: white;
   position: fixed;
+  z-index: 10;
   top: 0;
   right: 0;
-  width: 55%;
+  width: 40vw;
   height: 100%;
-  background: blue;
+  background: rgb(49, 56, 64);
+  transform: translate3d(100%, 0, 0);
   /* transform: translate3d(100%, 0, 0); */
+  transition: 0.5s ease-in;
+}
+
+nav section:nth-child(1) {
+  box-sizing: border-box;
+  width: 100%;
+  height: 30vh;
+  padding: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* nav .main-logo */
+nav .main-logo {
+  width: fit-content;
+  font-size: 0.7em;
+}
+nav .main-logo > span {
+  margin-bottom: 30px;
+  display: block;
+  width: 100%;
+  height: 7px;
+  background: white;
+}
+
+nav .main-logo p:nth-child(1) {
+  text-align: center;
+  font-size: 2em;
+  letter-spacing: 5px;
+}
+nav .main-logo p:nth-child(2) {
+  text-align: center;
+  letter-spacing: 7px;
+  font-size: 0.5em;
+  padding: 8px;
+}
+nav .main-logo p:nth-child(3) {
+  text-align: center;
+  font-size: 2em;
+  letter-spacing: 5px;
+  font-weight: 200;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+}
+
+/* .x-btn */
+nav .x-btn {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+nav .x-btn span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  width: 40px;
+  height: 2.6px;
+  background: white;
+  border-radius: 1.3px;
+  transform: translate3d(-20px, -1.3px, 0);
+}
+nav .x-btn span:nth-child(1) {
+  transform-origin: left;
+  transform: rotateZ(45deg) translate3d(-20px, -1.3px, 0);
+}
+nav .x-btn span:nth-child(2) {
+  transform-origin: left;
+  transform: rotateZ(-45deg) translate3d(-20px, -1.3px, 0);
+}
+
+nav .section-link {
+  box-sizing: border-box;
+  width: 100%;
+  height: 70vh;
+  padding: 0 10%;
+}
+nav .section-link ul {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+nav .section-link ul li {
+  padding: 3.5vh 0;
+  font-size: 1.4em;
+  font-weight: bold;
+  opacity: 0;
+  transform: translate3d(50%, 0, 0);
+  transition: 0.7s;
+}
+nav .section-link ul li span {
+  margin-left: 1em;
 }
 
 /* .container */
@@ -301,7 +400,9 @@ header .message-box p {
   justify-content: space-around;
   width: 50px;
   right: 20px;
-  height: 28px;
+  width: fit-content;
+  height: 29px;
+  cursor: pointer;
 }
 .pin {
   width: 30px;

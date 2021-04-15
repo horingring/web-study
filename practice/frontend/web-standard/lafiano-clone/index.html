@@ -13,14 +13,23 @@
     />
     <link rel="stylesheet" href="./css/default.css" />
     <link rel="stylesheet" href="./css/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <nav class="nav">
       <section>
         <div class="main-logo">
-          <p>HILLSTATE</p>
-          <p>- 힐스테이트 룰루 -</p>
-          <p>LAAAFIANO</p>
+          <span></span>
+          <div>
+            <p>HILLSTATE</p>
+            <p>- 힐스테이트 룰루 -</p>
+            <p>LAAAFIANO</p>
+          </div>
         </div>
         <div>
           <div class="x-btn">
@@ -29,41 +38,41 @@
           </div>
         </div>
       </section>
-      <section>
+      <section class="section-link">
         <ul>
           <li>
             <a href="#">
-              <img src="" alt="nav-logo" />
+              <i class="far fa-file-alt"></i>
               <span>INTRODUCE</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="" alt="nav-logo" />
+              <i class="far fa-calendar-check"></i>
               <span>SPACE PLAN</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="" alt="nav-logo" />
+              <i class="fab fa-pagelines"></i>
               <span>UNIT PLAN</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="" alt="nav-logo" />
+              <i class="fas fa-bullhorn"></i>
               <span>ANNOUNCEMENT</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="" alt="nav-logo" />
+              <i class="far fa-comment-dots"></i>
               <span>TALK</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="" alt="nav-logo" />
+              <i class="far fa-comments"></i>
               <span>QUESTION</span>
             </a>
           </li>
@@ -397,6 +406,86 @@
             messageBox_div.style.opacity = 1;
             messageBox_div.style.transform = "translate3d(0,0,0)";
           }, 2000);
+
+          //nav
+          const nav = document.querySelector("nav");
+          let timer1;
+          let timer2;
+          let timer3;
+          let timer4;
+          let timer5;
+          let timer6;
+
+          const pinWrap = document.querySelector(".pin-wrap");
+          //Menu btn 클릭 이벤트
+          pinWrap.addEventListener("click", () => {
+            nav.style.transform = "translate3d(0, 0, 0)";
+
+            // nav animation_in
+            const navLink_li = document.querySelectorAll(
+              "nav .section-link li"
+            );
+            timer1 = setTimeout(() => {
+              navLink_li[0].style.opacity = 1;
+              navLink_li[0].style.transform = "translate3d(0,0,0)";
+            }, 300);
+            timer2 = setTimeout(() => {
+              navLink_li[1].style.opacity = 1;
+              navLink_li[1].style.transform = "translate3d(0,0,0)";
+            }, 600);
+            timer3 = setTimeout(() => {
+              navLink_li[2].style.opacity = 1;
+              navLink_li[2].style.transform = "translate3d(0,0,0)";
+            }, 900);
+            timer4 = setTimeout(() => {
+              navLink_li[3].style.opacity = 1;
+              navLink_li[3].style.transform = "translate3d(0,0,0)";
+            }, 1200);
+            timer5 = setTimeout(() => {
+              navLink_li[4].style.opacity = 1;
+              navLink_li[4].style.transform = "translate3d(0,0,0)";
+            }, 1500);
+            timer6 = setTimeout(() => {
+              navLink_li[5].style.opacity = 1;
+              navLink_li[5].style.transform = "translate3d(0,0,0)";
+            }, 1800);
+          });
+
+          //x-btn 클릭 이벤트
+          const xBtn = document.querySelector(".x-btn");
+          xBtn.addEventListener("click", () => {
+            nav.style.transform = "translate3d(100%, 0, 0)";
+
+            // clearTimeout
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+            clearTimeout(timer3);
+            clearTimeout(timer4);
+            clearTimeout(timer5);
+            clearTimeout(timer6);
+
+            // nav animation_out
+            const navLink_li = document.querySelectorAll(
+              "nav .section-link li"
+            );
+            navLink_li[0].style.opacity = 0;
+            navLink_li[0].style.transform = "translate3d(100%,0,0)";
+
+            navLink_li[1].style.opacity = 0;
+            navLink_li[1].style.transform = "translate3d(100%,0,0)";
+
+            navLink_li[2].style.opacity = 0;
+            navLink_li[2].style.transform = "translate3d(100%,0,0)";
+
+            navLink_li[3].style.opacity = 0;
+            navLink_li[3].style.transform = "translate3d(100%,0,0)";
+
+            navLink_li[4].style.opacity = 0;
+            navLink_li[4].style.transform = "translate3d(100%,0,0)";
+
+            navLink_li[5].style.opacity = 0;
+            navLink_li[5].style.transform = "translate3d(100%,0,0)";
+          });
         });
       })();
     </script>
