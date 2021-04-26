@@ -1,0 +1,36 @@
+/* 공통 */
+#main-page,
+#close-page {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 메인페이지 #main-sec1 */
+#main-sec1 {
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 메인페이지 #main-sec2 */
+#main-sec2 {
+  width: 100vw;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 메인페이지 #main-sec3 */
+#main-sec3 {
+  width: 100vw;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
