@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="bg-wrap">
+      <img src="https://source.unsplash.com/random?happiness" />
+    </div>
     <today-is-main v-if="page === 1"></today-is-main>
     <today-is-close v-else-if="page === 2"></today-is-close>
   </div>

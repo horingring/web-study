@@ -1,32 +1,38 @@
 <template>
   <div id="main-page">
     <section id="main-sec1">
-      <div>안녕하세요!</div>
-      <div>{{ getMent }}</div>
+      <div class="hello">안녕하세요!</div>
+      <div class="ment">{{ getMent }}</div>
     </section>
     <section id="main-sec2">
       <div><small>오늘은</small></div>
       <section class="day-con">
         <b>{{ today.month }}</b>
-        <span>월</span>
+        <span>월&nbsp;</span>
         <b>{{ today.date }}</b>
-        <span>일</span>
+        <span>일&nbsp;</span>
         <b>{{ today.day }}</b>
         <span>요일</span>
         <small>입니다</small>
       </section>
     </section>
     <section id="main-sec3">
-      <div>{{ todayTemp.city }}의 날씨는 {{ todayTemp.weather }}</div>
       <div>
-        최고기온 {{ todayTemp.highTemp }} / 최저 {{ todayTemp.lowTemp }} 입니다!
+        <span class="city">{{ todayTemp.city }}</span
+        >&nbsp;의 날씨는 {{ todayTemp.weather }}
+      </div>
+      <div>
+        최고기온
+        <span class="temp">{{ todayTemp.highTemp }}&nbsp;</span>&#8451; /
+        최저기온 <span class="temp">{{ todayTemp.lowTemp }}&nbsp;</span>&#8451;
+        입니다!
       </div>
     </section>
   </div>
 </template>
 
 <script>
-// const API_KEY = "";
+const API_KEY = "1bc066762bbbcdabe54ce6caa0f707bf";
 const COORDS = "coords";
 
 export default {
@@ -148,6 +154,75 @@ export default {
     this.getNow();
   },
 };
+
+(function() {
+  function init() {
+    //배경화면 크기 설정
+    setLayout();
+
+    //인사
+    const mainSec1 = document.querySelector("#main-sec1");
+    const hello = document.querySelector(".hello");
+    const ment = document.querySelector(".ment");
+    const bgWrap = document.querySelector(".bg-wrap");
+
+    setTimeout(() => {
+      hello.style.fontSize = "2rem";
+      ment.style.opacity = 1;
+      ment.style.fontSize = "2.5rem";
+    }, 1000);
+    setTimeout(() => {
+      mainSec1.style.transform = `translate3d(0,0,0)`;
+    }, 3500);
+    setTimeout(() => {
+      hello.style.fontSize = "1rem";
+      ment.style.fontSize = "1.5rem";
+      bgWrap.style.filter = `blur(0)`;
+    }, 4500);
+
+    //날짜 알림
+    const mainSec2 = document.querySelector("#main-sec2");
+    const bTags = document.querySelectorAll("#main-sec2 b");
+
+    setTimeout(() => {
+      mainSec2.style.opacity = 1;
+    }, 4000);
+    setTimeout(() => {
+      for (let i = 0; i < bTags.length; i++) {
+        bTags[i].style.opacity = 1;
+        bTags[i].style.transform = `scale(1)`;
+      }
+    }, 5000);
+
+    //날씨 알림
+    const mainSec3 = document.querySelector("#main-sec3");
+    setTimeout(() => {
+      mainSec3.style.opacity = 1;
+    }, 6500);
+  }
+
+  function setLayout() {
+    const innerWidth = window.innerWidth;
+    const innerHeight = window.innerHeight;
+    const ratio = innerHeight / innerWidth;
+
+    const bgImage = document.querySelector(".bg-wrap>img");
+
+    if (ratio >= 1) {
+      bgImage.style.height = "100%";
+      bgImage.style.width = "auto";
+    } else if (ratio < 1) {
+      bgImage.style.width = "100%";
+      bgImage.style.height = "auto";
+    }
+  }
+  window.addEventListener("load", () => {
+    init();
+    window.addEventListener("resize", () => {
+      setLayout();
+    });
+  });
+})();
 </script>
 
 <style scoped></style>
