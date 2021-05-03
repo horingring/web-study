@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>toast-grid-prac</title>
+    <link
+      rel="stylesheet"
+      href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css"
+    />
+    <script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="grid"></div>
+
+    <script>
+      (function () {
+        let humanInfo = [];
+        window.addEventListener("load", () => {
+          axios
+            .get("https://jsonplaceholder.typicode.com/users")
+            .then((res) => {
+              console.log(res);
+              humanInfo = res.data;
+              for (let i = 0; i < humanInfo.length; i++) {
+                humanInfo[
+                  i
+                ].address = `${res.data[i].address.street}, ${res.data[i].address.city}`;
+              }
+              const grid = new tui.Grid({
+                el: document.getElementById("grid"),
+                data: humanInfo,
+                scrollX: false,
+                scrollY: false,
+                columns: [
+                  {
+                    header: "Idx",
+                    name: "id",
+                  },
+                  {
+                    header: "Username",
+                    name: "username",
+                  },
+                  {
+                    header: "Email",
+                    name: "email",
+                  },
+                  {
+                    header: "Address",
+                    name: "address",
+                  },
+                  {
+                    header: "PhoneNum",
+                    name: "phone",
+                  },
+                ],
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
+
+        /*
+        const gridData = [
+          {
+            idx: "자바스크립트",
+            username: "7년",
+            email: "12세",
+            address: "1억",
+            phone: "111-111-111",
+          },
+          {
+            idx: "파이썬",
+            username: "3년",
+            email: "9세",
+            address: "2억",
+            phone: "111-111-111",
+          },
+          {
+            idx: "자바",
+            username: "9년",
+            email: "15세",
+            address: "3억",
+            phone: "111-111-111",
+          },
+          {
+            idx: "A.I",
+            username: "10년",
+            email: "17세",
+            address: "4억",
+            phone: "111-111-111",
+          },
+        ];
+        */
+
+        /*
+        const grid = new tui.Grid({
+          el: document.getElementById("grid"),
+          data: humanInfo,
+          scrollX: false,
+          scrollY: false,
+          columns: [
+            {
+              header: "Idx",
+              name: "idx",
+            },
+            {
+              header: "Username",
+              name: "username",
+            },
+            {
+              header: "Email",
+              name: "email",
+            },
+            {
+              header: "Address",
+              name: "address",
+            },
+            {
+              header: "PhoneNum",
+              name: "phone",
+            },
+          ],
+        });
+        */
+      })();
+    </script>
+
+    <!-- <script src="./ToastGridPrac.js"></script> -->
+  </body>
+</html>
