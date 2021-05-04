@@ -1,0 +1,190 @@
+/* 폰트 */
+@font-face {
+  font-family: "buriM";
+  src: url(../fonts/Arita-buriM.ttf) format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "buriSB";
+  src: url(../fonts/Arita-buriSB.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "dotumM";
+  src: url(../fonts/Arita-dotumM.ttf) format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "dotumSB";
+  src: url(../fonts/Arita-dotumSB.ttf) format("truetype");
+  font-style: normal;
+  font-weight: 600;
+}
+
+html {
+  overflow-x: hidden;
+  font-family: buriM;
+}
+
+/* 헤더 */
+header {
+  box-sizing: border-box;
+  padding: 0 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  top: 0;
+  left: 0;
+  transition: 0.5s;
+}
+
+header.top {
+  height: 148px;
+}
+header.top .menu-btn-box {
+  padding: 20px;
+}
+header.top .logo {
+  transform: scale(1.3) translate3d(15px, 0, 0);
+}
+header.top .header-link-box {
+  transform: translate3d(0, 30px, 0);
+}
+header.top .language-box {
+  transform: translate3d(0, 0, 0);
+}
+
+header.white-background {
+  background: white;
+  color: rgb(0, 82, 149);
+}
+header.no-background {
+  background: transparent;
+  color: white;
+}
+
+/* header > section:nth-child(1) */
+header > section:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .menu-btn-box {
+  box-sizing: content-box;
+  padding: 12px;
+  width: 30px;
+  height: 30px;
+  background: rgb(0, 82, 149);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: 0.5s;
+}
+.menu-btn-box > span {
+  display: block;
+  background: white;
+  width: 100%;
+  height: 2px;
+}
+header .logo {
+  position: relative;
+  top: 2px;
+  padding-left: 30px;
+  font-size: 18px;
+  transition: 0.5s;
+}
+
+/* header > section:nth-child(2) */
+header > section:nth-child(2) {
+  position: relative;
+}
+.language-box {
+  font-family: dotumM;
+  position: absolute;
+  top: -100%;
+  right: 0;
+  transition: 0.5s;
+  transform: translate3d(0, -50px, 0);
+}
+.language-box > span:not(.language) {
+  margin: 0 5px;
+}
+.language {
+  cursor: pointer;
+}
+.language.onClicked {
+  font-weight: 600;
+}
+
+.header-link-box {
+  transition: 0.5s;
+}
+.header-link {
+  font-size: 18px;
+  color: #111111;
+  margin-left: 30px;
+}
+.no-background .header-link {
+  color: white;
+}
+
+/* 메인 */
+.scroll {
+  width: 100%;
+  height: 100vh;
+}
+
+.scroll1 {
+  background: red;
+}
+.scroll2 {
+  background: yellow;
+}
+.scroll3 {
+  background: blue;
+}
+.scroll4 {
+  background: green;
+}
+
+.side-navi-box {
+  position: fixed;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 4.5vw;
+  height: 15vh;
+  left: 0;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  background: yellowgreen;
+}
+.side-navi {
+  width: 8px;
+  height: 8px;
+  border: 1px solid white;
+  border-radius: 50%;
+  transition: 1s transform;
+  cursor: pointer;
+}
+.side-navi:hover:not(.on) {
+  background: #e5e5e5;
+}
+.side-navi.on {
+  transform: scale(1.7);
+}
+.side-navi.even {
+  background: #e5e5e5;
+}
