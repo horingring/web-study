@@ -37,6 +37,13 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import store, {
+  CHANGE_SCROLL_NUM,
+  PLUS_SCROLL_NUM,
+  MINUS_SCROLL_NUM,
+} from "../../store";
+
 let scrollLock = false;
 
 function getAbsYByVm(vm) {
@@ -57,13 +64,14 @@ function getDivTop(elName) {
 }
 
 export default {
+  store,
   data() {
     return {
-      scrollNum: 1,
       scrollPages: [1, 2, 3, 4],
     };
   },
   computed: {
+    ...mapState(["scrollNum"]),
     isEven() {
       return {
         even: this.scrollNum == 2 || this.scrollNum == 4,
@@ -71,13 +79,10 @@ export default {
     },
   },
   methods: {
-    changeScrollNum() {
-      this.$emit("changeScrollNum", this.scrollNum);
-    },
     onClickSideNavi(num) {
       if (scrollLock) return;
       scrollLock = true;
-      this.scrollNum = num;
+      this.$store.commit(CHANGE_SCROLL_NUM, num);
       $("html, body")
         .stop()
         .animate(
@@ -94,7 +99,6 @@ export default {
             },
           }
         );
-      this.$emit("changeScrollNum", this.scrollNum);
     },
     isOn(val) {
       return {
@@ -113,8 +117,8 @@ export default {
       if (e.deltaY > 0 && homePageVm.scrollNum < 4) {
         // wheel down
         console.log("wheel down");
-        homePageVm.scrollNum += 1;
-        homePageVm.changeScrollNum();
+        homePageVm.$store.commit(PLUS_SCROLL_NUM);
+        homePageVm.$store.commit(CHANGE_SCROLL_NUM, homePageVm.scrollNum);
         wheelLock = true;
         $("html, body")
           .stop()
@@ -135,8 +139,8 @@ export default {
       } else if (e.deltaY < 0 && homePageVm.scrollNum > 1) {
         // wheel up
         console.log("wheel up");
-        homePageVm.scrollNum -= 1;
-        homePageVm.changeScrollNum();
+        homePageVm.$store.commit(MINUS_SCROLL_NUM);
+        homePageVm.$store.commit(CHANGE_SCROLL_NUM, homePageVm.scrollNum);
         wheelLock = true;
         $("html, body")
           .stop()
@@ -165,26 +169,22 @@ export default {
         scrollTop >= 0 &&
         scrollTop < getDivTop("scroll2") - window.innerHeight / 2 - 1
       ) {
-        homePageVm.scrollNum = 1;
-        homePageVm.changeScrollNum();
+        homePageVm.$store.commit(CHANGE_SCROLL_NUM, 1);
         console.log(homePageVm.scrollNum);
       } else if (
         scrollTop >= getDivTop("scroll2") - window.innerHeight / 2 - 1 &&
         scrollTop < getDivTop("scroll3") - window.innerHeight / 2 - 1
       ) {
-        homePageVm.scrollNum = 2;
-        homePageVm.changeScrollNum();
+        homePageVm.$store.commit(CHANGE_SCROLL_NUM, 2);
         console.log(homePageVm.scrollNum);
       } else if (
         scrollTop >= getDivTop("scroll3") - window.innerHeight / 2 - 1 &&
         scrollTop < getDivTop("scroll4") - window.innerHeight / 2 - 1
       ) {
-        homePageVm.scrollNum = 3;
-        homePageVm.changeScrollNum();
+        homePageVm.$store.commit(CHANGE_SCROLL_NUM, 3);
         console.log(homePageVm.scrollNum);
       } else {
-        homePageVm.scrollNum = 4;
-        homePageVm.changeScrollNum();
+        homePageVm.$store.commit(CHANGE_SCROLL_NUM, 4);
         console.log(homePageVm.scrollNum);
       }
     });

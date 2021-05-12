@@ -33,10 +33,7 @@
       </section>
     </header>
 
-    <router-view
-      @changeScrollNum="changeScrollNum"
-      :scroll-lock="scrollLock"
-    ></router-view>
+    <router-view :scroll-lock="scrollLock"></router-view>
     <!-- <home-page
       v-if="page === 'home-page'"
       @changeScrollNum="changeScrollNum"
@@ -47,15 +44,19 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import store from "./store";
 import router from "./router/routes";
 import HomePage from "./components/main-page/HomePage";
 
 export default {
+  store,
   router,
   components: {
     HomePage,
   },
   computed: {
+    ...mapState(["scrollNum"]),
     headerClassObj() {
       return {
         "white-background": this.scrollNum == 2 || this.scrollNum == 4,
@@ -66,14 +67,10 @@ export default {
   data() {
     return {
       page: "home-page",
-      scrollNum: 1,
       scrollLock: false,
     };
   },
   methods: {
-    changeScrollNum(params) {
-      this.scrollNum = params;
-    },
     goToTop() {
       // scrollTo(0, 0);
       $("html, body")
