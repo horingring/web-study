@@ -7,9 +7,11 @@
           <span></span>
           <span></span>
         </div>
-        <div class="logo">
-          <p>A MORE<br />BEAUTIFUL<br />WORLD</p>
-        </div>
+        <router-link to="/" @click.native="goToTop">
+          <div class="logo">
+            <p>A MORE<br />BEAUTIFUL<br />WORLD</p>
+          </div>
+        </router-link>
       </section>
       <section>
         <div class="language-box">
@@ -18,25 +20,38 @@
           <span class="language english">ENGLISH</span>
         </div>
         <div class="header-link-box">
-          <span class="header-link">Commitment</span>
-          <span class="header-link">기업 사회 공헌</span>
-          <span class="header-link">Meet Us</span>
+          <router-link to="/commitment">
+            <span class="header-link">Commitment</span>
+          </router-link>
+          <router-link to="/makeupyourlife">
+            <span class="header-link">기업 사회 공헌</span>
+          </router-link>
+          <router-link to="/campaign">
+            <span class="header-link">Meet Us</span>
+          </router-link>
         </div>
       </section>
     </header>
-    <home-page
+
+    <router-view
+      @changeScrollNum="changeScrollNum"
+      :scroll-lock="scrollLock"
+    ></router-view>
+    <!-- <home-page
       v-if="page === 'home-page'"
       @changeScrollNum="changeScrollNum"
-    ></home-page>
-    <about-page v-else-if="page === 'about-page'"></about-page>
+    ></home-page> -->
+    <!-- <about-page v-else-if="page === 'about-page'"></about-page> -->
     <footer></footer>
   </div>
 </template>
 
 <script>
+import router from "./router/routes";
 import HomePage from "./components/main-page/HomePage";
 
 export default {
+  router,
   components: {
     HomePage,
   },
@@ -52,11 +67,26 @@ export default {
     return {
       page: "home-page",
       scrollNum: 1,
+      scrollLock: false,
     };
   },
   methods: {
     changeScrollNum(params) {
       this.scrollNum = params;
+    },
+    goToTop() {
+      // scrollTo(0, 0);
+      $("html, body")
+        .stop()
+        .animate(
+          { scrollTop: 0 },
+          {
+            duration: 600,
+            complete: function() {
+              document.querySelector("header").classList.add("top");
+            },
+          }
+        );
     },
   },
   mounted() {
