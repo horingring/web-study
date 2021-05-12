@@ -43,7 +43,7 @@ import store, {
   PLUS_SCROLL_NUM,
   MINUS_SCROLL_NUM,
   TOGGLE_SCROLL_LOCK,
-} from "../../store";
+} from "../../../store";
 
 function getAbsYByVm(vm) {
   let absYByVm = 0;

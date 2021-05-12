@@ -7,7 +7,7 @@
           <span></span>
           <span></span>
         </div>
-        <router-link to="/" @click.native="goToTop">
+        <router-link to="/" @click.native="onChangePage('homePage')">
           <div class="logo">
             <p>A MORE<br />BEAUTIFUL<br />WORLD</p>
           </div>
@@ -20,13 +20,22 @@
           <span class="language english">ENGLISH</span>
         </div>
         <div class="header-link-box">
-          <router-link to="/commitment">
+          <router-link
+            to="/about/commitment"
+            @click.native="onChangePage('commitmentPage')"
+          >
             <span class="header-link">Commitment</span>
           </router-link>
-          <router-link to="/makeupyourlife">
+          <router-link
+            to="/makeupyourlife"
+            @click.native="onChangePage('makeupyourlifePage')"
+          >
             <span class="header-link">기업 사회 공헌</span>
           </router-link>
-          <router-link to="/campaign">
+          <router-link
+            to="/campaign"
+            @click.native="onChangePage('campaignPage')"
+          >
             <span class="header-link">Meet Us</span>
           </router-link>
         </div>
@@ -45,9 +54,13 @@
 
 <script>
 import { mapState } from "vuex";
-import store, { CHANGE_SCROLL_NUM, TOGGLE_SCROLL_LOCK } from "./store";
+import store, {
+  CHANGE_PAGE,
+  CHANGE_SCROLL_NUM,
+  TOGGLE_SCROLL_LOCK,
+} from "./store";
 import router from "./router/routes";
-import HomePage from "./components/main-page/HomePage";
+import HomePage from "./components/main-page/HomePage/HomePage";
 
 export default {
   store,
@@ -56,20 +69,27 @@ export default {
     HomePage,
   },
   computed: {
-    ...mapState(["scrollNum", "scrollLock"]),
+    ...mapState(["page", "scrollNum", "scrollLock"]),
     headerClassObj() {
       return {
-        "white-background": this.scrollNum == 2 || this.scrollNum == 4,
-        "no-background": this.scrollNum == 1 || this.scrollNum == 3,
+        "white-background": !(
+          this.page === "homePage" &&
+          (this.scrollNum == 1 || this.scrollNum == 3)
+        ),
+        "no-background":
+          this.page === "homePage" &&
+          (this.scrollNum == 1 || this.scrollNum == 3),
       };
     },
   },
   data() {
-    return {
-      page: "home-page",
-    };
+    return {};
   },
   methods: {
+    onChangePage(pageName) {
+      this.goToTop();
+      this.$store.commit(CHANGE_PAGE, pageName);
+    },
     goToTop() {
       const rootVm = this;
 
@@ -84,7 +104,9 @@ export default {
             complete: function() {
               rootVm.$store.commit(CHANGE_SCROLL_NUM, 1);
               rootVm.$store.commit(TOGGLE_SCROLL_LOCK, false);
-              document.querySelector("header").classList.add("top");
+              setTimeout(() => {
+                document.querySelector("header").classList.add("top");
+              }, 10);
             },
           }
         );
