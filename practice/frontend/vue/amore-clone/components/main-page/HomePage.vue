@@ -114,54 +114,61 @@ export default {
     let wheelLock = false;
 
     //wheel 이벤트
-    window.addEventListener("wheel", (e) => {
-      if (wheelLock) return;
-      if (e.deltaY > 0 && homePageVm.scrollNum < 4) {
-        // wheel down
-        console.log("wheel down");
-        homePageVm.$store.commit(PLUS_SCROLL_NUM);
-        homePageVm.$store.commit(CHANGE_SCROLL_NUM, homePageVm.scrollNum);
-        wheelLock = true;
-        $("html, body")
-          .stop()
-          .animate(
-            { scrollTop: getAbsYByVm(homePageVm) + 1 },
-            {
-              duration: 600,
-              complete: function() {
-                if (homePageVm.scrollNum == 1) {
-                  document.querySelector("header").classList.add("top");
-                } else {
-                  document.querySelector("header").classList.remove("top");
-                }
-                wheelLock = false;
-              },
-            }
-          );
-      } else if (e.deltaY < 0 && homePageVm.scrollNum > 1) {
-        // wheel up
-        console.log("wheel up");
-        homePageVm.$store.commit(MINUS_SCROLL_NUM);
-        homePageVm.$store.commit(CHANGE_SCROLL_NUM, homePageVm.scrollNum);
-        wheelLock = true;
-        $("html, body")
-          .stop()
-          .animate(
-            { scrollTop: getAbsYByVm(homePageVm) + 1 },
-            {
-              duration: 600,
-              complete: function() {
-                if (homePageVm.scrollNum == 1) {
-                  document.querySelector("header").classList.add("top");
-                } else {
-                  document.querySelector("header").classList.remove("top");
-                }
-                wheelLock = false;
-              },
-            }
-          );
-      }
-    });
+    window.addEventListener(
+      "wheel",
+      (e) => {
+        if (wheelLock) {
+          e.preventDefault();
+          return;
+        }
+        if (e.deltaY > 0 && homePageVm.scrollNum < 4) {
+          // wheel down
+          console.log("wheel down");
+          wheelLock = true;
+          homePageVm.$store.commit(PLUS_SCROLL_NUM);
+          homePageVm.$store.commit(CHANGE_SCROLL_NUM, homePageVm.scrollNum);
+          $("html, body")
+            .stop()
+            .animate(
+              { scrollTop: getAbsYByVm(homePageVm) + 1 },
+              {
+                duration: 600,
+                complete: function() {
+                  if (homePageVm.scrollNum == 1) {
+                    document.querySelector("header").classList.add("top");
+                  } else {
+                    document.querySelector("header").classList.remove("top");
+                  }
+                  wheelLock = false;
+                },
+              }
+            );
+        } else if (e.deltaY < 0 && homePageVm.scrollNum > 1) {
+          // wheel up
+          console.log("wheel up");
+          homePageVm.$store.commit(MINUS_SCROLL_NUM);
+          homePageVm.$store.commit(CHANGE_SCROLL_NUM, homePageVm.scrollNum);
+          wheelLock = true;
+          $("html, body")
+            .stop()
+            .animate(
+              { scrollTop: getAbsYByVm(homePageVm) + 1 },
+              {
+                duration: 600,
+                complete: function() {
+                  if (homePageVm.scrollNum == 1) {
+                    document.querySelector("header").classList.add("top");
+                  } else {
+                    document.querySelector("header").classList.remove("top");
+                  }
+                  wheelLock = false;
+                },
+              }
+            );
+        }
+      },
+      { passive: false }
+    );
 
     //scroll 이벤트
     window.addEventListener("scroll", (e) => {
