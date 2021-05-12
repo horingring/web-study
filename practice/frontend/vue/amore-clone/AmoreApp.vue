@@ -33,7 +33,7 @@
       </section>
     </header>
 
-    <router-view :scroll-lock="scrollLock"></router-view>
+    <router-view></router-view>
     <!-- <home-page
       v-if="page === 'home-page'"
       @changeScrollNum="changeScrollNum"
@@ -45,7 +45,7 @@
 
 <script>
 import { mapState } from "vuex";
-import store from "./store";
+import store, { CHANGE_SCROLL_NUM, TOGGLE_SCROLL_LOCK } from "./store";
 import router from "./router/routes";
 import HomePage from "./components/main-page/HomePage";
 
@@ -56,7 +56,7 @@ export default {
     HomePage,
   },
   computed: {
-    ...mapState(["scrollNum"]),
+    ...mapState(["scrollNum", "scrollLock"]),
     headerClassObj() {
       return {
         "white-background": this.scrollNum == 2 || this.scrollNum == 4,
@@ -67,12 +67,14 @@ export default {
   data() {
     return {
       page: "home-page",
-      scrollLock: false,
     };
   },
   methods: {
     goToTop() {
+      const rootVm = this;
+
       // scrollTo(0, 0);
+      this.$store.commit(TOGGLE_SCROLL_LOCK, true);
       $("html, body")
         .stop()
         .animate(
@@ -80,6 +82,8 @@ export default {
           {
             duration: 600,
             complete: function() {
+              rootVm.$store.commit(CHANGE_SCROLL_NUM, 1);
+              rootVm.$store.commit(TOGGLE_SCROLL_LOCK, false);
               document.querySelector("header").classList.add("top");
             },
           }

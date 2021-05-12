@@ -42,9 +42,8 @@ import store, {
   CHANGE_SCROLL_NUM,
   PLUS_SCROLL_NUM,
   MINUS_SCROLL_NUM,
+  TOGGLE_SCROLL_LOCK,
 } from "../../store";
-
-let scrollLock = false;
 
 function getAbsYByVm(vm) {
   let absYByVm = 0;
@@ -71,7 +70,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["scrollNum"]),
+    ...mapState(["scrollNum", "scrollLock"]),
     isEven() {
       return {
         even: this.scrollNum == 2 || this.scrollNum == 4,
@@ -80,8 +79,9 @@ export default {
   },
   methods: {
     onClickSideNavi(num) {
-      if (scrollLock) return;
-      scrollLock = true;
+      const homePageVm = this;
+      if (this.scrollLock) return;
+      this.$store.commit(TOGGLE_SCROLL_LOCK, true);
       this.$store.commit(CHANGE_SCROLL_NUM, num);
       $("html, body")
         .stop()
@@ -95,10 +95,12 @@ export default {
               } else {
                 document.querySelector("header").classList.remove("top");
               }
-              scrollLock = false;
             },
           }
         );
+      setTimeout(() => {
+        homePageVm.$store.commit(TOGGLE_SCROLL_LOCK, false);
+      }, 600);
     },
     isOn(val) {
       return {
@@ -163,7 +165,7 @@ export default {
 
     //scroll 이벤트
     window.addEventListener("scroll", (e) => {
-      if (wheelLock || scrollLock) return;
+      if (wheelLock || homePageVm.scrollLock) return;
       let scrollTop = window.pageYOffset;
       if (
         scrollTop >= 0 &&
