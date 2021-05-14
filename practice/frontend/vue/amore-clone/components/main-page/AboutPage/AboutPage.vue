@@ -13,22 +13,44 @@
     <section>
       <ul>
         <li>
-          <div>Vision</div>
+          <router-link to="/about/vision">
+            <div>Vision</div>
+          </router-link>
         </li>
         <li>
-          <div>Commitment</div>
+          <router-link to="/about/commitment">
+            <div>Commitment</div>
+          </router-link>
         </li>
         <li class="last">
-          <div>공익재단</div>
+          <router-link to="/about/foundation">
+            <div>공익재단</div>
+          </router-link>
         </li>
       </ul>
       <div class="about_banner">
-        <span>Vision</span>
+        <span>{{ currentAboutPage }}</span>
       </div>
+      <router-view></router-view>
     </section>
   </main>
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+import store, { CHANGE_COMMITMENT_PAGE } from "../../../store";
+
+export default {
+  store,
+  computed: {
+    ...mapState(["aboutPage"]),
+    currentAboutPage() {
+      let currentAboutPage = this.aboutPage.page;
+      if (currentAboutPage === "foundation") {
+        currentAboutPage = "공익재단";
+      }
+      return currentAboutPage;
+    },
+  },
+};
 </script>

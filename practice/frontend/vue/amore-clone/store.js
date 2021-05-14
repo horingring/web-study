@@ -8,12 +8,18 @@ export const CHANGE_SCROLL_NUM = "CHANGE_SCROLL_NUM";
 export const PLUS_SCROLL_NUM = "PLUS_SCROLL_NUM";
 export const MINUS_SCROLL_NUM = "MINUS_SCROLL_NUM";
 export const TOGGLE_SCROLL_LOCK = "TOGGLE_SCROLL_LOCK";
+export const TOGGLE_WHEEL_LOCK = "TOGGLE_WHEEL_LOCK";
+export const CHANGE_COMMITMENT_PAGE = "CHANGE_COMMITMENT_PAGE";
 
 export default new Vuex.Store({
   state: {
     page: "homePage",
     scrollNum: 1,
     scrollLock: false,
+    wheelLock: false,
+    aboutPage: {
+      page: "Vision",
+    },
   },
   getters: {},
   mutations: {
@@ -31,6 +37,12 @@ export default new Vuex.Store({
     },
     [TOGGLE_SCROLL_LOCK](state, bool) {
       state.scrollLock = bool;
+    },
+    [TOGGLE_WHEEL_LOCK](state, bool) {
+      state.wheelLock = bool;
+    },
+    [CHANGE_COMMITMENT_PAGE](state, pageName) {
+      state.aboutPage.page = pageName;
     },
   },
   actions: {},
