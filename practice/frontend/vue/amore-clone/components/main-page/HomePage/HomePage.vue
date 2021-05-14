@@ -117,6 +117,8 @@ export default {
     window.addEventListener(
       "wheel",
       (e) => {
+        if (homePageVm.$root.page !== "homePage") return;
+
         if (wheelLock) {
           e.preventDefault();
           return;
@@ -172,6 +174,8 @@ export default {
 
     //scroll 이벤트
     window.addEventListener("scroll", (e) => {
+      if (homePageVm.$root.page !== "homePage") return;
+
       if (wheelLock || homePageVm.scrollLock) return;
       let scrollTop = window.pageYOffset;
       if (
